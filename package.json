@@ -1,0 +1,26 @@
+{
+  "name": "unit10hw",
+  "version": "1.0.0",
+  "description": "OOP and testing for week 10 homwork",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest --verbose test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gllil/team-template.git"
+  },
+  "author": "Gary Llil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gllil/team-template/issues"
+  },
+  "homepage": "https://github.com/gllil/team-template#readme",
+  "dependencies": {
+    "inquirer": "^7.0.6"
+  }
+}
