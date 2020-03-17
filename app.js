@@ -59,7 +59,16 @@ const mgrQues= [
     {
         type: "input",
         message: "What is your manager's office number?",
-        name: "officeNumber"
+        name: "officeNumber",
+        validate: function(value){
+            let pass = value.match(
+                /^([01]{1})?[-.\s]?\(?(\d{3})\)?[-.\s]?(\d{3})[-.\s]?(\d{4})\s?((?:#|ext\.?\s?|x\.?\s?){1}(?:\d+)?)?$/i
+            );
+            if(pass){
+                return true;
+            }
+            return 'Please enter a valid phone number';
+        }
     }
 ];
 
