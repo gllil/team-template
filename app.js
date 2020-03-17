@@ -111,6 +111,7 @@ function createTeam(){
             createIntern();
         } else {
             teamCreation();
+            console.log(teamCreation());
         };
     });
 };
@@ -135,9 +136,10 @@ function createIntern(){
 
 function teamCreation(){
     if(! fs.existsSync(OUTPUT_DIR)) {
-        fs.mkdirSync(OUTPUT_DIR)
+        fs.mkdirSync(OUTPUT_DIR);
+        fs.writeFileSync(outputPath, render(teamMembers), "utf-8");
     }
-    fs.writeFileSync(outputPath, render(teamMembers), "utf-8");
+    
 };
 
 
