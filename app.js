@@ -97,7 +97,7 @@ function createManager(){
 
 function createTeam(){
     inquirer.prompt({
-        type: "choice",
+        type: "list",
         message: "What type of team member would you like to add?",
         name: "role",
         choices: [
