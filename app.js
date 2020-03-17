@@ -13,29 +13,29 @@ const render = require("./lib/htmlRenderer");
 console.log("Welcome to the Team Template Maker!")
 
 const teamMembers = [];
-const something = [];
+const idArray = [];
 
 
 const internQues = [
     {
         type: "input",
         message: "What is your intern's name?",
-        name: "name"
+        name: "internName"
     },
     {
         type: "input",
         message: "What is your intern's ID?",
-        name: "id"
+        name: "internId"
     },
     {
         type: "input",
         message: "What is your intern's email?",
-        name: "email"
+        name: "internEmail"
     },
     {
         type: "input",
         message: "What is your intern's school?",
-        name: "github"
+        name: "school"
     }
 ];
 
@@ -44,17 +44,17 @@ const mgrQues= [
     {
         type: "input",
         message: "What is your manager's name?",
-        name: "name"
+        name: "managerName"
     },
     {
         type: "input",
         message: "What is your manager's ID?",
-        name: "id"
+        name: "managerId"
     },
     {
         type: "input",
         message: "What is your manager's email?",
-        name: "email"
+        name: "managerEmail"
     },
     {
         type: "input",
@@ -67,17 +67,17 @@ const engQues = [
     {
         type: "input",
         message: "What is your engineer's name?",
-        name: "name"
+        name: "engineerName"
     },
     {
         type: "input",
         message: "What is your engineer's ID?",
-        name: "id"
+        name: "engineerId"
     },
     {
         type: "input",
         message: "What is your engineer's email?",
-        name: "email"
+        name: "engineerEmail"
     },
     {
         type: "input",
@@ -87,47 +87,55 @@ const engQues = [
 ];
 
 function createManager(){
-    inquirer.prompt(mgrQues).then(function(res){
-        res.push(teamMembers)
-    });
-
-    createTeam();
-        
+    inquirer.prompt(mgrQues).then(answers => {
+        const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.officeNumber);
+        teamMembers.push(manager);
+        idArray.push(answers.managerId);
+        createTeam();
+    });       
 };
 
 function createTeam(){
     inquirer.prompt({
         type: "choice",
         message: "What type of team member would you like to add?",
-        name: "choice",
+        name: "role",
         choices: ["engineer", "intern", "I don't want to add any more team members"],
-    }).then(function(res){
-        if(res.choice === "engineer"){
+    }).then(function(answers){
+        if(answers.role === "engineer"){
             createEngineer();
-        } else if (res.choice === "intern"){
+        } else if (answers.role === "intern"){
             createIntern();
         } else {
             teamCreation();
-        }
+        };
     });
 };
 
 function createEngineer(){
-    inquirer.prompt(engQues).then(function(res){
-        res.push(teamMembers)
-    })
-
-    createTeam();
-}
+    inquirer.prompt(engQues).then(function(answers){
+        const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.github);
+        teamMembers.push(engineer);
+        idArray.push(answers.engineerId);
+        createTeam();
+    });
+};
 
 function createIntern(){
-    inquirer.prompt(internQues).then(function(res){
-        res.push(teamMembers);
+    inquirer.prompt(internQues).then(function(answers){
+        const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.school);
+        teamMembers.push(intern);
+        idArray.push(answers.engineerId);
+        createTeam();
     });
+};
 
-    createTeam();
-}
-
+function teamCreation(){
+    if(! fs.existsSync(OUTPUT_DIR)) {
+        fs.mkdirSync(OUTPUT_DIR)
+    }
+    fs.writeFileSync(outputPath, render(teamMemmbers), "utf-8");
+};
 
 
 
