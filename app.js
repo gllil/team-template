@@ -100,7 +100,10 @@ function createTeam(){
         type: "choice",
         message: "What type of team member would you like to add?",
         name: "role",
-        choices: ["engineer", "intern", "I don't want to add any more team members"],
+        choices: [
+            "engineer", 
+            "intern", 
+            "I don't want to add any more team members"],
     }).then(function(answers){
         if(answers.role === "engineer"){
             createEngineer();
@@ -134,7 +137,7 @@ function teamCreation(){
     if(! fs.existsSync(OUTPUT_DIR)) {
         fs.mkdirSync(OUTPUT_DIR)
     }
-    fs.writeFileSync(outputPath, render(teamMemmbers), "utf-8");
+    fs.writeFileSync(outputPath, render(teamMembers), "utf-8");
 };
 
 
