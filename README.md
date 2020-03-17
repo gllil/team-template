@@ -7,3 +7,4 @@ Through the node inquirer you will be asked questions about your team. Once you 
 You can view the details in this github link:
 https://gllil.github.io/team-template/
 
+<img src="https://github.com/gllil/team-template/blob/master/assets/10-OOP-homework-demo-1.png">
